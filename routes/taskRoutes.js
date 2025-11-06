@@ -1,0 +1,12 @@
+import express from 'express';
+import { authenticate } from '../middleware/authMiddleware.js';
+import { authorize } from '../middleware/roleMiddleware.js';
+import { createTask, listTasks, getTask, updateTask, deleteTask, addDependency } from '../controllers/taskController.js';
+const router = express.Router();
+router.post('/', authenticate, authorize('admin','manager','member'), createTask);
+router.get('/', authenticate, listTasks);
+router.get('/:id', authenticate, getTask);
+router.put('/:id', authenticate, updateTask);
+router.delete('/:id', authenticate, authorize('admin','manager'), deleteTask);
+router.post('/dependencies', authenticate, authorize('admin','manager'), addDependency);
+export default router;

@@ -1,0 +1,11 @@
+import express from 'express';
+import { authenticate } from '../middleware/authMiddleware.js';
+import { authorize } from '../middleware/roleMiddleware.js';
+import { createProject, listProjects, getProject, updateProject, deleteProject } from '../controllers/projectController.js';
+const router = express.Router();
+router.post('/', authenticate, authorize('admin','manager'), createProject);
+router.get('/', authenticate, listProjects);
+router.get('/:id', authenticate, getProject);
+router.put('/:id', authenticate, authorize('admin','manager'), updateProject);
+router.delete('/:id', authenticate, authorize('admin'), deleteProject);
+export default router;
