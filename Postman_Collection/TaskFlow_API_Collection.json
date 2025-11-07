@@ -1,0 +1,66 @@
+{
+  "info": {
+    "name": "TaskFlow API Collection",
+    "_postman_id": "taskflow-collection-id",
+    "description": "Postman collection for TaskFlow Collaborative Project Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "http://localhost:5001/api/auth/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Mihir Admin\",\n  \"email\": \"mihir@taskflow.com\",\n  \"password\": \"12345\",\n  \"role\": \"admin\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "http://localhost:5001/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"mihir@taskflow.com\",\n  \"password\": \"12345\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Create Project",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "http://localhost:5001/api/projects",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"ChatGPT Integration\",\n  \"description\": \"Backend integration for AI chat\",\n  \"startDate\": \"2025-11-05\",\n  \"endDate\": \"2026-01-05\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Create Task",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "http://localhost:5001/api/tasks",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"projectId\": 1,\n  \"title\": \"Integrate OpenAI API\",\n  \"description\": \"Setup backend API\",\n  \"assigneeId\": 2,\n  \"priority\": \"high\",\n  \"dueDate\": \"2025-11-10\",\n  \"estimateHours\": 10\n}"
+        }
+      }
+    },
+    {
+      "name": "Get Project Summary",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "http://localhost:5001/api/reports/1/tasks/summary"
+      }
+    }
+  ]
+}
